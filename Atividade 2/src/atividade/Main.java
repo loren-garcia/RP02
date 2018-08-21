@@ -5,78 +5,48 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+
     
+
     public static void main(String[] args) {
-        
-        Client cl = new Client();
+
+        Client client = new Client();
+        Country country = new Country();
         Scanner read = new Scanner(System.in);
-        List<Client> list = new ArrayList<Client>();
+
         
-        String clientName;
-        String countryName;
-        String clientPhone;
-        int clientAge;
         int option = 0;
         boolean typeLenght = true;
         boolean typeName = true;
-        
-        while(option != 3){
-            
+        boolean typeCountry = true;
+
+        while (option != 5) {
+
             Client ct = new Client();
+            System.out.println("Credit system verification");
+            System.out.println("--------------------------");
+            System.out.println("1 - Register client");
+            System.out.println("2 - Register country");
+            System.out.println("3 - Show client");
+            System.out.println("4 - Show country");
+            System.out.println("5 - Exit");
+            System.out.println("--------------------------");
             System.out.println("Choose an option: ");
             option = read.nextInt();
-            
-            if(option == 1){
-                do{
-                    System.out.println("Type client's name: ");
-                    clientName = read.next();
-                    
-                    if(clientName.length() < 5) {
-                        System.out.println("Client's name cannot have less then 5 characters!");
-                        typeLenght = false;
-                    }else if(clientName.contains("0")) {
-                        System.out.println("Client's name cannot be null!");
-                        typeLenght = false;
-                    }else {
-                        typeLenght = true;
-                    }
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(clientName.equalsIgnoreCase(list.get(i).getClientName())) {
-                            System.out.println("Client name already exists!");
-                            typeName = false;
-                        }else {
-                            typeName = true;
-                        }
-                    }                    
-                }while(typeLenght == false || typeName == false);
-                ct.setClientName(clientName);
-                
-                System.out.println("Type client's age: ");
-                clientAge = read.nextInt();
-                ct.setClientAge(clientAge);
-                
-                System.out.println("Type client's phone: ");
-                clientPhone = read.next();
-                ct.setClientPhone(clientPhone);
 
-                System.out.println("Type client's country: ");
-                countryName = read.next();
-                ct.checkCountry(countryName);
-                ct.setCountryName(countryName);
-                ct.checkCredit();
-                
-                list.add(ct);
-            }
-            if(option == 2){
-                for(int i = 0; i < list.size(); i++){
-                    System.out.println(list.get(i).getClientName());
-                    System.out.printf("%.2f %n", list.get(i).getClientCredit());
-                }
-            }
-            if(option == 3){
+            if (option == 1) {
+                client.registerClient();
+            }else if (option == 2) {
+                country.registerCountry();
+            }else if (option == 3) {
+                client.showClients();
+            }else if (option == 4) {
+                country.showCountries();
+            }else if (option == 5) {
                 System.out.println("Bye");
                 break;
+            }else{
+                System.out.println("Wrong option! Type again!");
             }
         }
     }
